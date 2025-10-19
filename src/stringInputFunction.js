@@ -8,6 +8,7 @@ function calculateDelimiterSum(input) {
     const customDelimiter = input.slice(2, nlIndex);
     const resultSliceString = input.slice(nlIndex + 2);
 
+
     const resultSegment = resultSliceString.split(customDelimiter);
     return resultSegment
       .map((s) => Number(s))
