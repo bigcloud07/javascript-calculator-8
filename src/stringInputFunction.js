@@ -2,53 +2,51 @@ import { Console } from '@woowacourse/mission-utils';
 
 const DEFAULT_DELIMITER = /,|:/;
 
-function validateNegativeNumbers(n) {
-    const negatives = n.filter((n) => n < 0);
-    if (negatives.length > 0) {
-        throw new Error('[ERROR]음수는 입력하지 마세요');
-    }
+function validateNegativeNumbers(arr) {
+  const negatives = arr.filter((number) => number < 0);
+  if (negatives.length > 0) {
+    throw new Error('[ERROR]음수는 입력하지 마세요');
+  }
 }
 
-function validateNaNValue(n){
-    const hasNaN = n.some((s) => Number.isNaN(s));
-    if(hasNaN){
-        throw new Error('[ERROR]입력을 확인해주세요');
-    }
+function validateNaNValues(arr) {
+  const hasNaN = arr.some((number) => Number.isNaN(number));
+  if (hasNaN) {
+    throw new Error('[ERROR]입력을 확인해주세요');
+  }
 }
 
-function validateWhiteSpace(n) {
-    const hasWhiteSpace = n.some((n) => n == 0);
-    if (hasWhiteSpace){
-        throw new Error('[ERROR]구분자 사이에 값을 입력해주세요')
-    }
+function validateEmptyValues(arr) {
+  const hasWhiteSpace = arr.some((number) => number === 0);
+  if (hasWhiteSpace) {
+    throw new Error('[ERROR]구분자 사이에 값을 입력해주세요');
+  }
 }
 
 function calculateDelimiterSum(input) {
-    if (input.startsWith('//')) {
-        const nlIndex = input.indexOf('\\n');
-        const customDelimiter = input.slice(2, nlIndex);
-        const resultSliceString = input.slice(nlIndex + 2);
-
-        const resultSegment = resultSliceString.split(customDelimiter).map(Number);
-        console.log(resultSegment)
-        validateNegativeNumbers(resultSegment)
-        validateNaNValue(resultSegment)
-        validateWhiteSpace(resultSegment)
-        return resultSegment.reduce((sum, n) => sum + n, 0);
-    }
-    else {
-        const segments = input.split(DEFAULT_DELIMITER).map(Number);
-        console.log(segments)
-        validateNegativeNumbers(segments)
-        validateNaNValue(segments)
-        validateWhiteSpace(segments)
-        return segments.reduce((sum, n) => sum + n, 0);
-    }
+  if (input.startsWith('//')) {
+    const newlineIndex = input.indexOf('\\n');
+    const customDelimiter = input.slice(2, newlineIndex);
+    const customSegmentString = input.slice(newlineIndex + 2);
+    const customSegments = customSegmentString
+      .split(customDelimiter)
+      .map(Number);
+    validateNegativeNumbers(customSegments);
+    validateNaNValues(customSegments);
+    validateEmptyValues(customSegments);
+    return customSegments.reduce((sum, num) => sum + num, 0);
+  }
+  const defaultSegments = input.split(DEFAULT_DELIMITER).map(Number);
+  validateNegativeNumbers(defaultSegments);
+  validateNaNValues(defaultSegments);
+  validateEmptyValues(defaultSegments);
+  return defaultSegments.reduce((sum, num) => sum + num, 0);
 }
 
 export default async function stringInputFunction() {
-    const input = await Console.readLineAsync('문자열을 입력해주세요: ');
-    Console.print(`입력하신 문자열은 ${input}입니다.`);
-    result = calculateDelimiterSum(input);
-    return result;
+  const input = await Console.readLineAsync('문자열을 입력해주세요: ');
+  Console.print(`입력하신 문자열은 ${input}입니다.`);
+
+  const result = calculateDelimiterSum(input);
+  return result;
 }

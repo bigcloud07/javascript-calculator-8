@@ -1,5 +1,5 @@
-import stringInputFunction from "./stringInputFunction.js";
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
+import stringInputFunction from './stringInputFunction.js';
 
 class App {
   async run() {
