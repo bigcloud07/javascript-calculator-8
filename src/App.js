@@ -1,9 +1,10 @@
 import stringInputFunction from "./stringInputFunction.js";
-
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    await stringInputFunction()
+    const result = await stringInputFunction();
+    Console.print(`결과 : ${result}`);
   }
 }
 

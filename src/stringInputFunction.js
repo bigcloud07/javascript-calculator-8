@@ -49,7 +49,6 @@ function calculateDelimiterSum(input) {
 export default async function stringInputFunction() {
     const input = await Console.readLineAsync('문자열을 입력해주세요: ');
     Console.print(`입력하신 문자열은 ${input}입니다.`);
-
-    const result = calculateDelimiterSum(input);
-    return Console.print(`결과 : ${result}`);
+    result = calculateDelimiterSum(input);
+    return result;
 }
