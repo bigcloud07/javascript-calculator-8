@@ -2,7 +2,7 @@ import {
   validateNegativeNumbers,
   validateNaNValues,
   validateEmptyValues,
-} from './utils/validators.js';
+} from './validators.js';
 
 const DEFAULT_DELIMITER = /,|:/;
 
