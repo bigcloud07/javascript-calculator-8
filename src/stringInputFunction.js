@@ -12,7 +12,7 @@ function validateNegativeNumbers(arr) {
 function validateNaNValues(arr) {
   const hasNaN = arr.some((number) => Number.isNaN(number));
   if (hasNaN) {
-    throw new Error('[ERROR]입력을 확인해주세요');
+    throw new Error('[ERROR]입력 값을 확인해주세요');
   }
 }
 
